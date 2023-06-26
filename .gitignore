@@ -27,3 +27,7 @@ target\**
 /tmp/
 /*rebel.xml
 */target/*
+/cloud-modules/cloud-order/cloud-order-server/target/classes/
+/cloud-modules/cloud-system/cloud-system-common/target/classes/META-INF/
+/cloud-modules/cloud-system/cloud-system-remote/target/classes/META-INF/
+/cloud-modules/cloud-system/cloud-system-server/target/classes/
