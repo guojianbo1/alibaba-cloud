@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.conditions.query.QueryChainWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cloud.entity.User;
+import com.cloud.service.impl.UserServiceImpl;
 import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -26,7 +27,7 @@ import java.time.LocalDateTime;
 @Slf4j
 public class UserServiceTest {
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
 
     @Test
     public void save(){
@@ -34,11 +35,17 @@ public class UserServiceTest {
         user.setUserId("456");
         user.setUserName("王五");
         user.setAge(24);
-        user.setCreateTime(LocalDateTime.now());
+//        user.setCreateTime(LocalDateTime.now());
         boolean save = userService.save(user);
         System.out.println(JSONObject.toJSONString(user));
         System.out.println(user.getId());
         System.out.println(save);
+    }
+
+    @Test
+    public void get(){
+        User user = userService.getUserByUserIdForUpdate("123");
+        System.out.println(JSONObject.toJSONString(user));
     }
 
     @Test

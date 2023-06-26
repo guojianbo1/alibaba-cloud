@@ -7,6 +7,7 @@ import com.cloud.result.Result;
 import com.cloud.service.UserService;
 import com.cloud.utils.AdminUserUtils;
 import com.google.common.collect.Lists;
+import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.ThreadUtils;
 import org.apache.tomcat.util.digester.Rules;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.List;
 
@@ -39,4 +41,11 @@ public class ApiUserController {
         return Result.success(userService.getAllMenus(userId));
     }
 
+    @PostMapping(value = "/reduceBalance")
+    @GlobalTransactional(name = "扣减用户金额事务")
+    public Result<Void> reduceBalance(@RequestParam("userId") String userId,
+                                              @RequestParam("balance") BigDecimal balance) {
+        userService.reduceBalance(userId,balance);
+        return Result.success();
+    }
 }

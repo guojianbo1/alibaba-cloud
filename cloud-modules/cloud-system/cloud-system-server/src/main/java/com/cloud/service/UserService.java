@@ -3,6 +3,7 @@ package com.cloud.service;
 import com.cloud.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -21,4 +22,13 @@ public interface UserService extends IService<User> {
      * @return 菜单列表
      */
     List<String> getAllMenus(String userId) throws InterruptedException;
+
+    /**
+     * 扣减用户余额
+     * @param userId
+     * @param balance
+     */
+    void reduceBalance(String userId, BigDecimal balance);
+
+
 }

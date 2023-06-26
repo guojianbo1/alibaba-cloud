@@ -5,6 +5,9 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.*;
+import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
+import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
+import com.baomidou.mybatisplus.generator.config.rules.IColumnType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.mysql.cj.jdbc.Driver;
 import lombok.extern.slf4j.Slf4j;
@@ -148,6 +151,17 @@ public class MyBatisGenerator {
         dsc.setUsername(jdbcUsername);
         dsc.setPassword(jdbcPassword);
         dsc.setUrl(jdbcUrl);
+        MySqlTypeConvert typeConvert = new MySqlTypeConvert() {
+            @Override
+            public IColumnType processTypeConvert(GlobalConfig globalConfig, String fieldType) {
+                if (fieldType.toLowerCase().contains("timestamp")) {
+                    // 将timestamp转换为java.util.Date
+                    return DbColumnType.DATE;
+                }
+                return super.processTypeConvert(globalConfig, fieldType);
+            }
+        };
+        dsc.setTypeConvert(typeConvert);
         mpg.setDataSource(dsc);
 
         // 策略配置

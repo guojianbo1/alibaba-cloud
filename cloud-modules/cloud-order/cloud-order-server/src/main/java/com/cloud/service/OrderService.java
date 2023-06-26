@@ -1,5 +1,6 @@
 package com.cloud.service;
 
+import com.cloud.domain.request.CreateOrderReqDTO;
 import com.cloud.entity.Order;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -13,4 +14,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface OrderService extends IService<Order> {
 
+    /**
+     * 创建订单
+     * @param userId 用户id
+     * @param userName 用户名
+     * @param reqDTO 下单参数
+     */
+    void create(String userId, String userName, CreateOrderReqDTO reqDTO);
 }

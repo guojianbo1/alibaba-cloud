@@ -2,6 +2,7 @@ package com.cloud.mapper;
 
 import com.cloud.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -13,4 +14,10 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface UserMapper extends BaseMapper<User> {
 
+    /**
+     * 独占锁
+     * @param userId
+     * @return
+     */
+    User selectByUserIdForUpdate(@Param("userId") String userId);
 }

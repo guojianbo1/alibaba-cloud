@@ -4,6 +4,7 @@ import com.cloud.constant.Constants;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * 响应信息主体
@@ -21,6 +22,9 @@ public class Result<T> implements Serializable {
     private int code;
     private String msg;
     private T data;
+    public boolean isSuccess(){
+        return Objects.equals(code,SUCCESS);
+    }
     public static <T> Result<T> success() {
         return restResult(null, SUCCESS, Constants.SUCCESS_MSG);
     }

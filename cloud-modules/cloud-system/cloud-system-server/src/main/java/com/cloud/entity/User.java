@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 
 import java.time.LocalDateTime;
 import java.io.Serializable;
+import java.util.Date;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -57,14 +58,19 @@ public class User implements Serializable {
     private BigDecimal balance;
 
     /**
+     * 冻结金额
+     */
+    private BigDecimal freezeBalance;
+
+    /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 更新时间
      */
-    private LocalDateTime updateTime;
+    private Date updateTime;
 
 
     public static final String ID = "id";

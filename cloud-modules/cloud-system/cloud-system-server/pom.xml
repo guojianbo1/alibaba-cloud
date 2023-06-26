@@ -15,7 +15,7 @@
         <!-- 系统公共 依赖 -->
         <dependency>
             <groupId>com.cloud</groupId>
-            <artifactId>cloud-system-common</artifactId>
+            <artifactId>cloud-system-remote</artifactId>
         </dependency>
         <!-- SpringBoot Web-->
         <dependency>

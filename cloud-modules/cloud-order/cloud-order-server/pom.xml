@@ -52,5 +52,10 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-seata</artifactId>
         </dependency>
+        <!-- 系统公共 依赖 -->
+        <dependency>
+            <groupId>com.cloud</groupId>
+            <artifactId>cloud-system-remote</artifactId>
+        </dependency>
     </dependencies>
 </project>

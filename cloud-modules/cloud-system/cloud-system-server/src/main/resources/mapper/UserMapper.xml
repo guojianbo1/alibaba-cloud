@@ -9,13 +9,19 @@
         <result column="user_name" property="userName"/>
         <result column="age" property="age"/>
         <result column="balance" property="balance"/>
+        <result column="freeze_balance" property="freezeBalance"/>
         <result column="create_time" property="createTime"/>
         <result column="update_time" property="updateTime"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, user_id, user_name, age, balance, create_time, update_time
+        id, user_id, user_name, age, balance, freeze_balance, create_time, update_time
     </sql>
+    <select id="selectByUserIdForUpdate" resultType="com.cloud.entity.User">
+        select
+        <include refid="Base_Column_List"/>
+        from ry_user where user_id = #{userId} for update
+    </select>
 
 </mapper>
