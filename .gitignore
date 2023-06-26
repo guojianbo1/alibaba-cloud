@@ -26,3 +26,4 @@ target\**
 */*.class
 /tmp/
 /*rebel.xml
+*/target/*
