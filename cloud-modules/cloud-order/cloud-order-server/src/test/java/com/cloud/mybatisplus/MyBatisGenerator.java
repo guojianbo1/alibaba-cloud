@@ -41,7 +41,7 @@ public class MyBatisGenerator {
 
     public void initTables(){
         tablePrefix = new String[] {"ry"};
-        tables = new String[] {"ry_user"};
+        tables = new String[] {"ry_order"};
     }
 
     /**

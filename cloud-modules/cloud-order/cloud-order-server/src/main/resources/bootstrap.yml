@@ -4,15 +4,12 @@ spring:
     allow-circular-references: true
   application:
     # 应用名称
-    name: cloud-system
+    name: cloud-order
   profiles:
     # 环境配置
     active: dev
   cloud:
     nacos:
-      discovery:
-        # 服务注册地址
-        server-addr: 192.168.88.128:8848
       config:
         # 配置中心地址
         server-addr: 192.168.88.128:8848
@@ -22,8 +19,4 @@ spring:
         shared-configs:
           - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
 
-#csp:
-#  sentinel:
-#    statistic:
-#      max:
-#        rt: 1000
+

@@ -3,17 +3,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>alibaba-cloud</artifactId>
+        <artifactId>cloud-modules</artifactId>
         <groupId>com.cloud</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>cloud-modules</artifactId>
+    <artifactId>cloud-order</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>cloud-system</module>
-        <module>cloud-order</module>
+        <module>cloud-order-common</module>
+        <module>cloud-order-server</module>
+        <module>cloud-order-remote</module>
     </modules>
 
 

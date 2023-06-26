@@ -9,6 +9,7 @@ import com.cloud.service.UserService;
 import com.cloud.utils.AdminUserUtils;
 import com.cloud.utils.AssertUtil;
 import com.google.common.collect.Lists;
+import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,10 @@ public class AdminUserController {
     private UserService userService;
 
     @GetMapping(value = "/detail")
+    @GlobalTransactional
     public Result<UserDetailDTO> getData() {
+        System.out.println("userService1:"+userService);
+        System.out.println("userService1.hashCode:"+userService.hashCode());
         User user = userService.getOne(new QueryWrapper<User>().eq(User.USER_ID, AdminUserUtils.getUserId()));
         AssertUtil.businessInvalid(user==null,"用户不存在");
         return Result.success(new UserDetailDTO(AdminUserUtils.getUserId(),AdminUserUtils.getUserName(),user.getAge(), Lists.newArrayList("用户管理","订单管理")));

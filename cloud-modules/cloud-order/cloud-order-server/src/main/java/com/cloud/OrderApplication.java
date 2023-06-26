@@ -17,10 +17,11 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableFeignClients( basePackages = {"com.cloud.**"})
 @EnableDiscoveryClient
 @MapperScan("com.cloud.mapper")
-public class SystemApplication {
+@EnableSeataSpringConfig
+public class OrderApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SystemApplication.class);
-        System.out.println("系统服务===启动成功");
+        SpringApplication.run(OrderApplication.class);
+        System.out.println("订单服务===启动成功");
     }
 }

@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.conditions.query.QueryChainWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cloud.entity.User;
+import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,7 +31,7 @@ public class UserServiceTest {
     @Test
     public void save(){
         User user = new User();
-        user.setUserId("345");
+        user.setUserId("456");
         user.setUserName("王五");
         user.setAge(24);
         user.setCreateTime(LocalDateTime.now());

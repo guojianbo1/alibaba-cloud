@@ -65,6 +65,18 @@
                 <artifactId>cloud-system-remote</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
+            <!-- 订单服务公共依赖 -->
+            <dependency>
+                <groupId>com.cloud</groupId>
+                <artifactId>cloud-order-common</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <!-- 添加订单远程调用 依赖 -->
+            <dependency>
+                <groupId>com.cloud</groupId>
+                <artifactId>cloud-order-remote</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
             <!-- mybatis-plus 代码生成-->
             <dependency>
                 <groupId>com.baomidou</groupId>

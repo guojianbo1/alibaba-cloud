@@ -16,7 +16,7 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 用户表
+ * 订单表
  * </p>
  *
  * @author guojianbo
@@ -25,36 +25,26 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("ry_user")
-public class User implements Serializable {
+@TableName("ry_order")
+public class Order implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 主键id
+     * 订单id
      */
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    @TableId(value = "order_id", type = IdType.AUTO)
+    private Long orderId;
 
     /**
-     * 用户id
+     * 订单金额
+     */
+    private BigDecimal orderAmount;
+
+    /**
+     * 订单所属用户id
      */
     private String userId;
-
-    /**
-     * 用户名称
-     */
-    private String userName;
-
-    /**
-     * 年龄
-     */
-    private Integer age;
-
-    /**
-     * 余额
-     */
-    private BigDecimal balance;
 
     /**
      * 创建时间
@@ -67,15 +57,11 @@ public class User implements Serializable {
     private LocalDateTime updateTime;
 
 
-    public static final String ID = "id";
+    public static final String ORDER_ID = "order_id";
+
+    public static final String ORDER_AMOUNT = "order_amount";
 
     public static final String USER_ID = "user_id";
-
-    public static final String USER_NAME = "user_name";
-
-    public static final String AGE = "age";
-
-    public static final String BALANCE = "balance";
 
     public static final String CREATE_TIME = "create_time";
 
