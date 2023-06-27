@@ -74,7 +74,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     }
 
     @Override
-    @GlobalTransactional(name = "订单创建事务")
+    @GlobalTransactional(name = "订单创建事务2")
     @Transactional(rollbackFor = Exception.class)
     public void create2(String userId, String userName, CreateOrderReqDTO reqDTO) {
         //扣减金额(需要获取用户的金额锁，再执行操作)
