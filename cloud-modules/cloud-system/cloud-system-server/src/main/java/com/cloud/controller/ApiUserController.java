@@ -42,7 +42,6 @@ public class ApiUserController {
     }
 
     @PostMapping(value = "/reduceBalance")
-    @GlobalTransactional(name = "扣减用户金额事务")
     public Result<Void> reduceBalance(@RequestParam("userId") String userId,
                                               @RequestParam("balance") BigDecimal balance) {
         userService.reduceBalance(userId,balance);

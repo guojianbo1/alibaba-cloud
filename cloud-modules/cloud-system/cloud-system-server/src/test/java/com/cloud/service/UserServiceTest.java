@@ -4,7 +4,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.conditions.query.QueryChainWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.cloud.domain.request.TccReduceBalanceDTO;
 import com.cloud.entity.User;
+import com.cloud.remote.ApiUserTccReduceBalanceService;
+import com.cloud.result.Result;
 import com.cloud.service.impl.UserServiceImpl;
 import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
@@ -28,6 +32,8 @@ import java.time.LocalDateTime;
 public class UserServiceTest {
     @Autowired
     private UserServiceImpl userService;
+    @Autowired
+    private ApiUserTccReduceBalanceService apiUserTccReduceBalanceService;
 
     @Test
     public void save(){
@@ -43,9 +49,15 @@ public class UserServiceTest {
     }
 
     @Test
-    public void get(){
-        User user = userService.getUserByUserIdForUpdate("123");
-        System.out.println(JSONObject.toJSONString(user));
+    public void get() throws InterruptedException {
+        TccReduceBalanceDTO tccReduceBalanceDTO = new TccReduceBalanceDTO();
+        tccReduceBalanceDTO.setUserId("123");
+        tccReduceBalanceDTO.setAmount(new BigDecimal(10));
+        tccReduceBalanceDTO.setOrderId(1099L);
+        Result<Void> prepare = apiUserTccReduceBalanceService.prepare(tccReduceBalanceDTO);
+        System.out.println(JSONObject.toJSONString(prepare));
+        Thread.sleep(10000L);
+        System.out.println("end");
     }
 
     @Test

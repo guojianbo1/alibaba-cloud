@@ -14,20 +14,21 @@ public interface TccReduceBalanceUserService {
      * tcc扣减金额try
      * @param userId 用户id
      * @param amount 金额
+     * @param orderId 订单id
      */
-    void prepare(String userId, BigDecimal amount);
+    void prepare(String userId, BigDecimal amount, Long orderId);
 
     /**
      * tcc扣减金额commit
      * @param userId 用户id
      * @param amount 金额
      */
-    void commit(String userId, BigDecimal amount);
+    void commit(String userId, BigDecimal amount, Long orderId);
 
     /**
      * tcc扣减金额rollback
      * @param userId 用户id
      * @param amount 金额
      */
-    void rollback(String userId, BigDecimal amount);
+    void rollback(String userId, BigDecimal amount, Long orderId);
 }

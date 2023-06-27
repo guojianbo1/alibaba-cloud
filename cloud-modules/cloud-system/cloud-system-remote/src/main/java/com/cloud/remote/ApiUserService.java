@@ -1,6 +1,7 @@
 package com.cloud.remote;
 
 import com.cloud.result.Result;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,5 +36,6 @@ public interface ApiUserService {
      * @return 结果
      */
     @RequestMapping(value = "/reduceBalance", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @GlobalTransactional(name = "扣减用户金额事务")
     Result<Void> reduceBalance(@RequestParam("userId") String userId, @RequestParam("balance") BigDecimal balance);
 }

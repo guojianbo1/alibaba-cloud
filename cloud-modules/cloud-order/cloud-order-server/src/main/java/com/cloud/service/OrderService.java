@@ -21,4 +21,12 @@ public interface OrderService extends IService<Order> {
      * @param reqDTO 下单参数
      */
     void create(String userId, String userName, CreateOrderReqDTO reqDTO);
+
+    /**
+     * 创建订单
+     * @param userId 用户id
+     * @param userName 用户名
+     * @param reqDTO 下单参数
+     */
+    void create2(String userId, String userName, CreateOrderReqDTO reqDTO);
 }

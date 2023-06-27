@@ -2,6 +2,7 @@ package com.cloud.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.cloud.annotation.ExcludeFromGlobalException;
+import com.cloud.domain.request.TccReduceBalanceDTO;
 import com.cloud.result.Result;
 import com.cloud.service.TccReduceBalanceUserService;
 import com.cloud.service.UserService;
@@ -35,30 +36,24 @@ public class ApiUserTccReduceBalanceController {
     private TccReduceBalanceUserService tccReduceBalanceUserService;
 
     @PostMapping(value = "/prepare")
-    public Result<Void> prepare(@RequestBody Map<String, String> params) {
-        String userId = params.get("userId");
-        String amount = params.get("amount");
-        tccReduceBalanceUserService.prepare(userId, new BigDecimal(amount));
+    public Result<Void> prepare(@RequestBody TccReduceBalanceDTO dto) {
+        tccReduceBalanceUserService.prepare(dto.getUserId(), dto.getAmount(), dto.getOrderId());
         return Result.success();
     }
 
     @ExcludeFromGlobalException
     @PostMapping(value = "/commit")
     public boolean commit(@RequestBody BusinessActionContext actionContext) {
-        Map<String,String> params = JSONObject.parseObject(JSONObject.toJSONString(actionContext.getActionContext("params")), Map.class);
-        String userId = params.get("userId");
-        String amount = params.get("amount");
-        tccReduceBalanceUserService.commit(userId, new BigDecimal(amount));
+        TccReduceBalanceDTO dto = JSONObject.parseObject(JSONObject.toJSONString(actionContext.getActionContext("params")), TccReduceBalanceDTO.class);
+        tccReduceBalanceUserService.commit(dto.getUserId(), dto.getAmount(), dto.getOrderId());
         return true;
     }
 
     @ExcludeFromGlobalException
     @PostMapping(value = "/rollback")
     public boolean rollback(@RequestBody BusinessActionContext actionContext) {
-        Map<String,String> params = JSONObject.parseObject(JSONObject.toJSONString(actionContext.getActionContext("params")), Map.class);
-        String userId = params.get("userId");
-        String amount = params.get("amount");
-        tccReduceBalanceUserService.rollback(userId, new BigDecimal(amount));
+        TccReduceBalanceDTO dto = JSONObject.parseObject(JSONObject.toJSONString(actionContext.getActionContext("params")), TccReduceBalanceDTO.class);
+        tccReduceBalanceUserService.rollback(dto.getUserId(), dto.getAmount(), dto.getOrderId());
         return true;
     }
 }

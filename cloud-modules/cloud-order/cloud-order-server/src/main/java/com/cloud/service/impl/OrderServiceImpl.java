@@ -1,6 +1,7 @@
 package com.cloud.service.impl;
 
 import com.cloud.domain.request.CreateOrderReqDTO;
+import com.cloud.domain.request.TccReduceBalanceDTO;
 import com.cloud.entity.Order;
 import com.cloud.mapper.OrderMapper;
 import com.cloud.remote.ApiIntegralRecordService;
@@ -14,6 +15,8 @@ import io.seata.rm.tcc.TCCResourceManager;
 import io.seata.rm.tcc.api.BusinessActionContext;
 import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,6 +35,7 @@ import java.util.Map;
  * @since 2023-06-26
  */
 @Service
+@RefreshScope
 public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements OrderService {
     @Autowired
     private ApiUserService apiUserService;
@@ -39,20 +43,43 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     private ApiIntegralRecordService apiIntegralRecordService;
     @Autowired
     private ApiUserTccReduceBalanceService apiUserTccReduceBalanceService;
+    @Value("${at.error:false}")
+    private boolean atError;
 
     @Override
     @GlobalTransactional(name = "订单创建事务")
     @Transactional(rollbackFor = Exception.class)
     public void create(String userId, String userName, CreateOrderReqDTO reqDTO) {
-//        //扣减金额(需要获取用户的金额锁，再执行操作)
-//        Result<Void> result = apiUserService.reduceBalance(userId, reqDTO.getOrderAmount());
-//        AssertUtil.businessInvalid(!result.isSuccess(),result.getMsg());
+        //创建订单
+        Order order = new Order();
+        order.setUserId(userId);
+        order.setOrderAmount(reqDTO.getOrderAmount());
+        order.setCreateTime(new Date());
+        order.setUpdateTime(new Date());
+        this.save(order);
         //使用Tcc扣减金额
-        Map<String, String> params = new HashMap<>();
-        params.put("userId",userId);
-        params.put("amount",reqDTO.getOrderAmount().toString());
-        Result<Void> result = apiUserTccReduceBalanceService.prepare(params);
+        TccReduceBalanceDTO tccReduceBalanceDTO = new TccReduceBalanceDTO();
+        tccReduceBalanceDTO.setUserId(userId);
+        tccReduceBalanceDTO.setAmount(reqDTO.getOrderAmount());
+        tccReduceBalanceDTO.setOrderId(order.getOrderId());
+        Result<Void> result = apiUserTccReduceBalanceService.prepare(tccReduceBalanceDTO);
+        AssertUtil.businessInvalid(!result.isSuccess(),result.getMsg());
+        if (atError){
+            AssertUtil.businessInvalid("TCC扣减金额后异常");
+        }
+//        //保存积分
+//        Result<Void> save = apiIntegralRecordService.save(userId, order.getOrderId(), reqDTO.getOrderAmount());
+//        AssertUtil.businessInvalid(!save.isSuccess(),save.getMsg());
+//        //otherTodo
+//        System.out.println("otherTodo");
+    }
 
+    @Override
+    @GlobalTransactional(name = "订单创建事务")
+    @Transactional(rollbackFor = Exception.class)
+    public void create2(String userId, String userName, CreateOrderReqDTO reqDTO) {
+        //扣减金额(需要获取用户的金额锁，再执行操作)
+        Result<Void> result = apiUserService.reduceBalance(userId, reqDTO.getOrderAmount());
         AssertUtil.businessInvalid(!result.isSuccess(),result.getMsg());
         //创建订单
         Order order = new Order();
@@ -61,10 +88,6 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         order.setCreateTime(new Date());
         order.setUpdateTime(new Date());
         this.save(order);
-//        //保存积分
-//        Result<Void> save = apiIntegralRecordService.save(userId, order.getOrderId(), reqDTO.getOrderAmount());
-//        AssertUtil.businessInvalid(!save.isSuccess(),save.getMsg());
-//        //otherTodo
-//        System.out.println("otherTodo");
+
     }
 }

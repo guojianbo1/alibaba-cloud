@@ -31,7 +31,6 @@ public class AdminUserController {
     private UserService userService;
 
     @GetMapping(value = "/detail")
-    @GlobalTransactional
     public Result<UserDetailDTO> getData() {
         System.out.println("userService1:"+userService);
         System.out.println("userService1.hashCode:"+userService.hashCode());

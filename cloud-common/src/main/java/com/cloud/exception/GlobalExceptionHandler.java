@@ -33,22 +33,22 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(value = Exception.class)
 	@ResponseBody
 	public Result<Void> exceptionHandler(Exception e, HandlerMethod handlerMethod) throws Exception {
+		log.error("Exception:", e);
 		if (isExcludedFromGlobalExceptionHandler(handlerMethod)) {
 			// 抛出异常，绕过全局异常处理逻辑
 			throw e;
 		}
-		log.error("Exception:", e);
 		return Result.error();
 	}
 	
 	@ExceptionHandler(value = BusinessException.class)
 	@ResponseBody
 	public Result<Void> businessExceptionHandler(BusinessException e, HandlerMethod handlerMethod) {
+		log.info("business error : {}",e.getMessage(),e);
 		if (isExcludedFromGlobalExceptionHandler(handlerMethod)) {
 			// 抛出异常，绕过全局异常处理逻辑
 			throw e;
 		}
-		log.info("business error : {}",e.getMessage(),e);
 		return Result.error(e.getCode(),e.getMessage());
 	}
 

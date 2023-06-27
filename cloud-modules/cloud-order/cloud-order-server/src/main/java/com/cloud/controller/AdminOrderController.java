@@ -35,5 +35,10 @@ public class AdminOrderController {
         return Result.success();
     }
 
+    @PostMapping(value = "/create2")
+    public Result<Void> create2(@RequestBody @Validated CreateOrderReqDTO reqDTO) {
+        orderService.create2(AdminUserUtils.getUserId(),AdminUserUtils.getUserName(),reqDTO);
+        return Result.success();
+    }
 }
 
