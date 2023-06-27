@@ -58,7 +58,7 @@ public interface ApiUserTccReduceBalanceService {
      */
     @TwoPhaseBusinessAction(name = "userTccReduceBalanceService", commitMethod = "commit", rollbackMethod = "rollback")
     @RequestMapping(value = "/prepare", method = RequestMethod.POST)
-    Result<Void> prepare(@RequestBody @BusinessActionContextParameter(paramName = "params")  TccReduceBalanceDTO params);
+    boolean prepare(@RequestBody @BusinessActionContextParameter(paramName = "params")  TccReduceBalanceDTO params);
 
     /**
      * Commit boolean.

@@ -35,10 +35,11 @@ public class ApiUserTccReduceBalanceController {
     @Autowired
     private TccReduceBalanceUserService tccReduceBalanceUserService;
 
+    @ExcludeFromGlobalException
     @PostMapping(value = "/prepare")
-    public Result<Void> prepare(@RequestBody TccReduceBalanceDTO dto) {
+    public boolean prepare(@RequestBody TccReduceBalanceDTO dto) {
         tccReduceBalanceUserService.prepare(dto.getUserId(), dto.getAmount(), dto.getOrderId());
-        return Result.success();
+        return true;
     }
 
     @ExcludeFromGlobalException

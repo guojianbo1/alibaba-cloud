@@ -31,3 +31,4 @@ target\**
 /cloud-modules/cloud-system/cloud-system-common/target/classes/META-INF/
 /cloud-modules/cloud-system/cloud-system-remote/target/classes/META-INF/
 /cloud-modules/cloud-system/cloud-system-server/target/classes/
+/cloud-modules/cloud-system/cloud-system-remote/target/test-classes/META-INF/
