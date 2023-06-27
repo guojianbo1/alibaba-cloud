@@ -54,7 +54,7 @@ public class UserServiceTest {
         tccReduceBalanceDTO.setUserId("123");
         tccReduceBalanceDTO.setAmount(new BigDecimal(10));
         tccReduceBalanceDTO.setOrderId(1099L);
-        Result<Void> prepare = apiUserTccReduceBalanceService.prepare(tccReduceBalanceDTO);
+        boolean prepare = apiUserTccReduceBalanceService.prepare(tccReduceBalanceDTO);
         System.out.println(JSONObject.toJSONString(prepare));
         Thread.sleep(10000L);
         System.out.println("end");
