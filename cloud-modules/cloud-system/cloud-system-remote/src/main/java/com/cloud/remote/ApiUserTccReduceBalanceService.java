@@ -19,7 +19,8 @@ import java.util.Map;
 
 /**
  * 用户接口
- *
+ * 这种feign提交try,commit,rollback的方式不建议使用，
+ * 建议使用com.cloud.remote.ApiUserService#tccReduceBalance(com.cloud.domain.request.TccReduceBalanceDTO)这种
  * @author guojianbo
  * @date 2023/6/19 13:53
  */

@@ -2,8 +2,10 @@ package com.cloud.controller;
 
 import com.alibaba.nacos.api.config.annotation.NacosValue;
 import com.cloud.annotation.AdminDrawUser;
+import com.cloud.domain.request.TccReduceBalanceDTO;
 import com.cloud.domain.response.UserDetailDTO;
 import com.cloud.result.Result;
+import com.cloud.service.TccReduceBalanceUserServiceV2;
 import com.cloud.service.UserService;
 import com.cloud.utils.AdminUserUtils;
 import com.google.common.collect.Lists;
@@ -33,6 +35,8 @@ import java.util.List;
 public class ApiUserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private TccReduceBalanceUserServiceV2 tccReduceBalanceUserServiceV2;
 
     @GetMapping(value = "/getAllMenu")
     public Result<List<String>> getAllMenu(@RequestParam("userId") String userId) throws InterruptedException {
@@ -42,9 +46,17 @@ public class ApiUserController {
     }
 
     @PostMapping(value = "/reduceBalance")
+    @GlobalTransactional(name = "扣减用户金额事务")
     public Result<Void> reduceBalance(@RequestParam("userId") String userId,
                                               @RequestParam("balance") BigDecimal balance) {
         userService.reduceBalance(userId,balance);
+        return Result.success();
+    }
+
+    @PostMapping(value = "/tccReduceBalance")
+    @GlobalTransactional(name = "TCC扣减用户金额事务")
+    public Result<Void> tccReduceBalance(@RequestBody TccReduceBalanceDTO dto) {
+        tccReduceBalanceUserServiceV2.prepare(dto);
         return Result.success();
     }
 }

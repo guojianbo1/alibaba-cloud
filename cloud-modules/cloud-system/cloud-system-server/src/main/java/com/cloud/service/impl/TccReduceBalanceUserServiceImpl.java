@@ -150,6 +150,7 @@ public class TccReduceBalanceUserServiceImpl implements TccReduceBalanceUserServ
         //冻结金额释放
         User user = userService.getUserByUserIdForUpdate(userId);
         User userNew = new User();
+        userNew.setId(user.getId());
         userNew.setBalance(user.getBalance().add(amount));
         userNew.setFreezeBalance(user.getFreezeBalance().subtract(amount));
         userService.updateById(userNew);

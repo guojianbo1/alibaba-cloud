@@ -62,7 +62,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         tccReduceBalanceDTO.setUserId(userId);
         tccReduceBalanceDTO.setAmount(reqDTO.getOrderAmount());
         tccReduceBalanceDTO.setOrderId(order.getOrderId());
-        boolean prepare = apiUserTccReduceBalanceService.prepare(tccReduceBalanceDTO);
+//        boolean prepare = apiUserTccReduceBalanceService.prepare(tccReduceBalanceDTO);
+        Result<Void> result = apiUserService.tccReduceBalance(tccReduceBalanceDTO);
+        AssertUtil.businessInvalid(!result.isSuccess(),result.getMsg());
         if (atError){
             AssertUtil.businessInvalid("TCC扣减金额后异常");
         }

@@ -27,7 +27,7 @@ public class OrderServiceTest {
     public void create2(){
         CreateOrderReqDTO reqDTO = new CreateOrderReqDTO();
         reqDTO.setOrderAmount(new BigDecimal("4"));
-        orderService.create2("123","张三",reqDTO);
+        orderService.create("123","张三",reqDTO);
         System.out.println("create2:end");
     }
 }
