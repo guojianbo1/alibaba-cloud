@@ -1,6 +1,7 @@
 package com.cloud.service;
 
 import com.cloud.domain.request.CreateOrderReqDTO;
+import com.cloud.entity.Order;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * test
@@ -29,5 +31,15 @@ public class OrderServiceTest {
         reqDTO.setOrderAmount(new BigDecimal("4"));
         orderService.create("123","张三",reqDTO);
         System.out.println("create2:end");
+    }
+
+    @Test
+    public void save(){
+        Order order = new Order();
+        order.setUserId("123");
+        order.setOrderAmount(new BigDecimal("10"));
+        order.setCreateTime(new Date());
+        order.setUpdateTime(new Date());
+        orderService.save(order);
     }
 }
