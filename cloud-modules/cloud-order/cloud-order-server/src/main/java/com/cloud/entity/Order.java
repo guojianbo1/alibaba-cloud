@@ -30,7 +30,7 @@ public class Order implements Serializable {
     /**
      * 订单id
      */
-    @TableId(value = "order_id", type = IdType.AUTO)
+    @TableId(value = "order_id", type = IdType.INPUT)
     private Long orderId;
 
     /**

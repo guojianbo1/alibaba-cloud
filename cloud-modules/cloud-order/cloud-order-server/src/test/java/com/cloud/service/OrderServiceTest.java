@@ -10,6 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 /**
@@ -35,11 +37,15 @@ public class OrderServiceTest {
 
     @Test
     public void save(){
+
+
         Order order = new Order();
+        order.setOrderId(System.currentTimeMillis());
         order.setUserId("123");
         order.setOrderAmount(new BigDecimal("10"));
         order.setCreateTime(new Date());
         order.setUpdateTime(new Date());
         orderService.save(order);
     }
+
 }

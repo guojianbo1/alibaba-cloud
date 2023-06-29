@@ -1,5 +1,6 @@
 package com.cloud.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cloud.domain.request.CreateOrderReqDTO;
 import com.cloud.domain.request.TccReduceBalanceDTO;
 import com.cloud.entity.Order;
@@ -9,22 +10,18 @@ import com.cloud.remote.ApiUserService;
 import com.cloud.remote.ApiUserTccReduceBalanceService;
 import com.cloud.result.Result;
 import com.cloud.service.OrderService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cloud.utils.AssertUtil;
-import io.seata.rm.tcc.TCCResourceManager;
-import io.seata.rm.tcc.api.BusinessActionContext;
 import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * <p>
@@ -52,6 +49,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     public void create(String userId, String userName, CreateOrderReqDTO reqDTO) {
         //创建订单
         Order order = new Order();
+        order.setOrderId(System.currentTimeMillis());
         order.setUserId(userId);
         order.setOrderAmount(reqDTO.getOrderAmount());
         order.setCreateTime(new Date());
@@ -84,6 +82,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         AssertUtil.businessInvalid(!result.isSuccess(),result.getMsg());
         //创建订单
         Order order = new Order();
+        order.setOrderId(System.currentTimeMillis());
         order.setUserId(userId);
         order.setOrderAmount(reqDTO.getOrderAmount());
         order.setCreateTime(new Date());

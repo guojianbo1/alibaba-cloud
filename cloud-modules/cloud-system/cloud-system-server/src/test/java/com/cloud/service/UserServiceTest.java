@@ -2,14 +2,11 @@ package com.cloud.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.conditions.query.QueryChainWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cloud.domain.request.TccReduceBalanceDTO;
 import com.cloud.entity.User;
 import com.cloud.remote.ApiUserTccReduceBalanceService;
-import com.cloud.result.Result;
 import com.cloud.service.impl.UserServiceImpl;
-import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +15,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 /**
  * test
