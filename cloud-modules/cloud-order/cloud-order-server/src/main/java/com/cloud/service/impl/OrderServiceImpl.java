@@ -47,7 +47,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
     @Override
     @GlobalTransactional(name = "订单创建事务")
-//    @ShardingTransactionType(TransactionType.BASE)
+//    @ShardingTransactionType(TransactionType.LOCAL)
     @Transactional(rollbackFor = Exception.class)
     public void create(String userId, String userName, CreateOrderReqDTO reqDTO) {
         //创建订单

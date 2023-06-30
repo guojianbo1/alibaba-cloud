@@ -95,6 +95,11 @@
                 <artifactId>guava</artifactId>
                 <version>20.0</version> <!-- 指定统一的版本 -->
             </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.80</version> <!-- 指定统一的版本 -->
+            </dependency>
             <!-- ShardingSphere JDBC -->
             <dependency>
                 <groupId>org.apache.shardingsphere</groupId>

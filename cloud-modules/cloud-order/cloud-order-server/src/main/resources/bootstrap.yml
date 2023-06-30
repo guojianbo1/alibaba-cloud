@@ -19,4 +19,9 @@ spring:
         # 共享配置
         shared-configs:
           - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
-
+  shardingsphere:
+    enabled: false #关闭sharding分库分表，sharding分库分表集成seata不成功
+#seata:
+#  service:
+#    vgroup-mapping:
+#      default_tx_group: "ds0,ds1,ds2,ds3"

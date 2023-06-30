@@ -32,3 +32,9 @@ target\**
 /cloud-modules/cloud-system/cloud-system-remote/target/classes/META-INF/
 /cloud-modules/cloud-system/cloud-system-server/target/classes/
 /cloud-modules/cloud-system/cloud-system-remote/target/test-classes/META-INF/
+/cloud-modules/cloud-order/cloud-order-remote/target/
+/cloud-modules/cloud-order/cloud-order-common/target/
+/cloud-modules/cloud-order/cloud-order-server/target/
+/cloud-modules/cloud-system/cloud-system-common/target/
+/cloud-modules/cloud-system/cloud-system-remote/target/
+/cloud-modules/cloud-system/cloud-system-server/target/
