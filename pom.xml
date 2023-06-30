@@ -90,23 +90,23 @@
                 <version>1.7</version>
                 <scope>test</scope>
             </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>20.0</version> <!-- 指定统一的版本 -->
+            </dependency>
             <!-- ShardingSphere JDBC -->
             <dependency>
                 <groupId>org.apache.shardingsphere</groupId>
                 <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
                 <version>4.1.1</version>
             </dependency>
+            <!-- ShardingSphere与seata整合-->
             <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>20.0</version> <!-- 指定统一的版本 -->
+                <groupId>org.apache.shardingsphere</groupId>
+                <artifactId>sharding-transaction-base-seata-at</artifactId>
+                <version>4.1.1</version>
             </dependency>
-            <!-- ShardingSphere Proxy -->
-<!--            <dependency>-->
-<!--                <groupId>org.apache.shardingsphere</groupId>-->
-<!--                <artifactId>sharding-proxy-common</artifactId>-->
-<!--                <version>4.0.0</version>-->
-<!--            </dependency>-->
         </dependencies>
     </dependencyManagement>
 
