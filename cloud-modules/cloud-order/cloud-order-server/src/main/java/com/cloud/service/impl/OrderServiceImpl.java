@@ -12,6 +12,8 @@ import com.cloud.result.Result;
 import com.cloud.service.OrderService;
 import com.cloud.utils.AssertUtil;
 import io.seata.spring.annotation.GlobalTransactional;
+import org.apache.shardingsphere.transaction.annotation.ShardingTransactionType;
+import org.apache.shardingsphere.transaction.core.TransactionType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -45,6 +47,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
     @Override
     @GlobalTransactional(name = "订单创建事务")
+//    @ShardingTransactionType(TransactionType.BASE)
     @Transactional(rollbackFor = Exception.class)
     public void create(String userId, String userName, CreateOrderReqDTO reqDTO) {
         //创建订单
