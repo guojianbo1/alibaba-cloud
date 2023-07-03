@@ -32,7 +32,7 @@ public class GlobalExceptionHandler {
 
 	@ExceptionHandler(value = Exception.class)
 	@ResponseBody
-	public Result<Void> exceptionHandler(Exception e, HandlerMethod handlerMethod) throws Exception {
+	public Result<Void> exceptionHandler(Exception e,HandlerMethod handlerMethod) throws Exception {
 		log.error("Exception:", e);
 		if (isExcludedFromGlobalExceptionHandler(handlerMethod)) {
 			// 抛出异常，绕过全局异常处理逻辑
@@ -43,13 +43,28 @@ public class GlobalExceptionHandler {
 	
 	@ExceptionHandler(value = BusinessException.class)
 	@ResponseBody
-	public Result<Void> businessExceptionHandler(BusinessException e, HandlerMethod handlerMethod) {
+	public Result<Void> businessExceptionHandler(BusinessException e,HandlerMethod handlerMethod) {
 		log.info("business error : {}",e.getMessage(),e);
 		if (isExcludedFromGlobalExceptionHandler(handlerMethod)) {
 			// 抛出异常，绕过全局异常处理逻辑
 			throw e;
 		}
 		return Result.error(e.getCode(),e.getMessage());
+	}
+
+	@ResponseBody
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public Result<Void>  exceptionHandler(MethodArgumentNotValidException e,HandlerMethod handlerMethod) throws MethodArgumentNotValidException {
+		log.info("req params error", e);
+		if (isExcludedFromGlobalExceptionHandler(handlerMethod)) {
+			// 抛出异常，绕过全局异常处理逻辑
+			throw e;
+		}
+		String message = e.getBindingResult().getFieldError().getDefaultMessage();
+		if (StringUtils.isNotBlank(message) && !"不能为空".equals(message)) {
+			return Result.error(Constants.PARAM_ERROR,message);
+		}
+		return Result.error(Constants.PARAM_ERROR,Constants.PARAM_ERROR_MSG);
 	}
 
 	private boolean isExcludedFromGlobalExceptionHandler(HandlerMethod handlerMethod) {

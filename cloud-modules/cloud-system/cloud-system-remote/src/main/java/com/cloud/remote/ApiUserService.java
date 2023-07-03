@@ -5,6 +5,7 @@ import com.cloud.result.Result;
 import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -25,7 +26,7 @@ public interface ApiUserService {
      * @return 结果
      */
     @RequestMapping(value = "/getAllMenu", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE)
-    Result<List<String>> getAllMenu(@RequestParam("userId") String userId );
+    Result<List<String>> getAllMenu(@RequestParam("userId") String userId ) throws InterruptedException;
 
     /**
      * XA扣减用户余额
@@ -55,5 +56,5 @@ public interface ApiUserService {
      * @return 结果
      */
     @RequestMapping(value = "/tccReduceBalance", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    Result<Void> tccReduceBalance(@RequestBody TccReduceBalanceDTO dto);
+    Result<Void> tccReduceBalance(@RequestBody @Validated TccReduceBalanceDTO dto);
 }
