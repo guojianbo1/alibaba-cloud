@@ -21,7 +21,7 @@ public interface UserService extends IService<User> {
      * @param userId 用户id
      * @return 菜单列表
      */
-    List<String> getAllMenus(String userId) throws InterruptedException;
+    List<String> getAllMenus(String userId);
 
     /**
      * 扣减用户余额

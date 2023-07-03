@@ -26,7 +26,7 @@ public interface ApiUserService {
      * @return 结果
      */
     @RequestMapping(value = "/getAllMenu", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE)
-    Result<List<String>> getAllMenu(@RequestParam("userId") String userId ) throws InterruptedException;
+    Result<List<String>> getAllMenu(@RequestParam("userId") String userId );
 
     /**
      * XA扣减用户余额

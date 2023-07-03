@@ -32,10 +32,9 @@ public class ApiUserServiceImpl implements ApiUserService {
 
     @Override
     @GetMapping(value = "/getAllMenu")
-    public Result<List<String>> getAllMenu(String userId) throws InterruptedException {
+    public Result<List<String>> getAllMenu(String userId) {
         System.out.println("userService:"+userService);
         System.out.println("userService.hashCode:"+userService.hashCode());
-        int i = 1/0;
         return Result.success(userService.getAllMenus(userId));
     }
 

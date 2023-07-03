@@ -34,14 +34,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     private int count;
 
     @Override
-    public List<String> getAllMenus(String userId) throws InterruptedException {
+    public List<String> getAllMenus(String userId) {
         count++;
         System.out.println(count);
         System.out.println("this:"+this);
         System.out.println("this.hashCode:"+this.hashCode());
         log.info("sleepTime:"+sleepTime);
         if (sleepTime>0){
-            Thread.sleep(sleepTime);
+            try {
+                Thread.sleep(sleepTime);
+            }catch (Exception e){
+                AssertUtil.businessInvalid(e.getMessage());
+            }
         }
         return Lists.newArrayList("用户管理","订单管理");
     }
