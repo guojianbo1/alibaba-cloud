@@ -1,5 +1,7 @@
 package com.cloud.domain.request;
 
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiParam;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -14,10 +16,15 @@ import java.math.BigDecimal;
  */
 @Data
 public class TccReduceBalanceDTO {
+    @ApiModelProperty(value = "用户id")
     @NotBlank(message = "userId不能为空")
     private String userId;
+
+    @ApiModelProperty(value = "扣减金额")
     @NotNull(message = "金额不能为空")
     private BigDecimal amount;
+
+    @ApiModelProperty(value = "订单id")
     @NotNull(message = "订单id不能为空")
     private Long orderId;
 }

@@ -31,4 +31,9 @@ public class JwtConstants {
      * 令牌秘钥
      */
     public final static String SECRET = "abcdefghijklmnopqrstuvwxyz";
+
+    /**
+     * app用户ID字段
+     */
+    public static final String APP_USER_ID = "app_user_id";
 }

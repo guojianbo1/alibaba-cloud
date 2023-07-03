@@ -1,5 +1,9 @@
 # Spring
 spring:
+  mvc:
+    pathmatch:
+      #开启swagger必须用
+      matching-strategy: ant_path_matcher
   main:
     allow-bean-definition-overriding: true
     allow-circular-references: true

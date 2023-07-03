@@ -1,5 +1,6 @@
 package com.cloud.domain.response;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,8 +19,12 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class UserDetailDTO {
+   @ApiModelProperty(value = "用户id")
    private String userId;
+   @ApiModelProperty(value = "用户名称")
    private String userName;
+   @ApiModelProperty(value = "用户年龄")
    private Integer age;
+   @ApiModelProperty(value = "菜单列表")
    private List<String> menuList;
 }
