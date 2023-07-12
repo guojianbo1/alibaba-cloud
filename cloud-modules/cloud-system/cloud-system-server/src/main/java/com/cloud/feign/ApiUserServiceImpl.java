@@ -1,5 +1,6 @@
 package com.cloud.feign;
 
+import com.alibaba.fastjson.JSONObject;
 import com.cloud.domain.request.TccReduceBalanceDTO;
 import com.cloud.remote.ApiUserService;
 import com.cloud.result.Result;
@@ -37,8 +38,8 @@ public class ApiUserServiceImpl implements ApiUserService {
     @ApiOperation("获取用户所有菜单")
     @GetMapping(value = "/getAllMenu")
     public Result<List<String>> getAllMenu(@ApiParam(value = "用户id") String userId) {
-        System.out.println("userService:"+userService);
-        System.out.println("userService.hashCode:"+userService.hashCode());
+        log.info("userService:"+userService);
+        log.info("userService.hashCode:"+userService.hashCode());
         return Result.success(userService.getAllMenus(userId));
     }
 
@@ -55,6 +56,7 @@ public class ApiUserServiceImpl implements ApiUserService {
     @PostMapping(value = "/tccReduceBalance")
     @GlobalTransactional(name = "TCC扣减用户金额事务")
     public Result<Void> tccReduceBalance(TccReduceBalanceDTO dto) {
+        log.info("tccReduceBalance:"+ JSONObject.toJSONString(dto));
         tccReduceBalanceUserServiceV2.prepare(dto);
         return Result.success();
     }

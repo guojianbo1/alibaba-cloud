@@ -20,55 +20,55 @@ import java.util.Date;
  * @since 2023-06-26
  */
 @Data
-  @EqualsAndHashCode(callSuper = false)
-    @Accessors(chain = true)
-  @TableName("ry_integral_record")
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
+@TableName("ry_integral_record")
 public class IntegralRecord implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-      /**
+    /**
      * 主键id
      */
-        @TableId(value = "id", type = IdType.AUTO)
-      private Long id;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
 
-      /**
+    /**
      * 积分
      */
-      private BigDecimal amount;
+    private BigDecimal amount;
 
-      /**
+    /**
      * 订单id
      */
-      private Long orderId;
+    private Long orderId;
 
-      /**
+    /**
      * 用户id
      */
-      private String userId;
+    private String userId;
 
-      /**
+    /**
      * 创建时间
      */
-      private Date createTime;
+    private Date createTime;
 
-      /**
+    /**
      * 更新时间
      */
-      private Date updateTime;
+    private Date updateTime;
 
 
-      public static final String ID = "id";
+    public static final String ID = "id";
 
-      public static final String AMOUNT = "amount";
+    public static final String AMOUNT = "amount";
 
-      public static final String ORDER_ID = "order_id";
+    public static final String ORDER_ID = "order_id";
 
-      public static final String USER_ID = "user_id";
+    public static final String USER_ID = "user_id";
 
-      public static final String CREATE_TIME = "create_time";
+    public static final String CREATE_TIME = "create_time";
 
-      public static final String UPDATE_TIME = "update_time";
+    public static final String UPDATE_TIME = "update_time";
 
-  }
+}

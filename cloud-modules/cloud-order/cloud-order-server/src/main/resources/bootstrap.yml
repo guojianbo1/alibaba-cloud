@@ -1,5 +1,9 @@
 # Spring
 spring:
+  mvc:
+    pathmatch:
+      #开启swagger必须用
+      matching-strategy: ant_path_matcher
   main:
     allow-bean-definition-overriding: true
     allow-circular-references: true
@@ -21,6 +25,7 @@ spring:
           - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
   shardingsphere:
     enabled: false #关闭sharding分库分表，sharding分库分表集成seata不成功
+
 #seata:
 #  service:
 #    vgroup-mapping:

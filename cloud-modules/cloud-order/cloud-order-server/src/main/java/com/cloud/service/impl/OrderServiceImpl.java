@@ -44,11 +44,12 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     private ApiUserTccReduceBalanceService apiUserTccReduceBalanceService;
     @Value("${at.error:false}")
     private boolean atError;
-
+    //XT模式 undo_log
+    //TCC模式
     @Override
     @GlobalTransactional(name = "订单创建事务")
 //    @ShardingTransactionType(TransactionType.LOCAL)
-    @Transactional(rollbackFor = Exception.class)
+//    @Transactional(rollbackFor = Exception.class)
     public void create(String userId, String userName, CreateOrderReqDTO reqDTO) {
         //创建订单
         Order order = new Order();

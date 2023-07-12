@@ -36,9 +36,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public List<String> getAllMenus(String userId) {
         count++;
-        System.out.println(count);
-        System.out.println("this:"+this);
-        System.out.println("this.hashCode:"+this.hashCode());
+        log.info(count);
+        log.info("this:"+this);
+        log.info("this.hashCode:"+this.hashCode());
         log.info("sleepTime:"+sleepTime);
         if (sleepTime>0){
             try {
